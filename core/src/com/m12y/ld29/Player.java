@@ -30,13 +30,13 @@ public class Player {
                 -0.1f, 0f,
                 0.1f, 0f,
                 0.5f, 0.4f,
-                0.5f, 2f,
-                -0.5f, 2f
+                0.5f, 1.7f,
+                -0.5f, 1.7f
         });
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.friction = 0;
-        fixtureDef.density = 1;
+        fixtureDef.density = 1.3f;
         body.createFixture(fixtureDef);
         shape.dispose();
 
@@ -72,7 +72,7 @@ public class Player {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.E) && isOnGround()) {
-            delta.add(0, 2);
+            delta.add(0, 2.3f);
         }
 
         delta.add(0, body.getLinearVelocity().rotateRad(-angle).y);

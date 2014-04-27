@@ -63,19 +63,74 @@ public class Floor {
         return vertices;
     }
 
-    public static ArrayList<Vector2> floor1() {
+    public static ArrayList<Vector2> floor() {
         ArrayList<Vector2> vertices = new ArrayList<Vector2>();
 
-        vertices.addAll(corner(0, 0, 1, 3));
+        // Start
+        vertices.add(new Vector2(0, 0));
+        // Big stairs
         vertices.add(new Vector2(5, 0));
         vertices.add(new Vector2(5, 2));
         vertices.add(new Vector2(7, 2));
         vertices.add(new Vector2(7, 4));
-        vertices.addAll(corner(9, 4, 1, 4));
+        vertices.add(new Vector2(9, 4));
+        // Pit
+        vertices.add(new Vector2(9, -6));
+        vertices.add(new Vector2(8, -6));
+        // Underground corner
+        vertices.addAll(corner(8, -4, 1, 1));
+        vertices.add(new Vector2(5, -4));
+        vertices.add(new Vector2(5, -10));
+        vertices.add(new Vector2(11, -10));
+        // Other side of pit
+        vertices.add(new Vector2(11, 5));
+        vertices.add(new Vector2(13, 5));
+        vertices.add(new Vector2(13, 0));
+        // First corner
+        vertices.addAll(corner(17, 0, 1, 4));
+        vertices.add(new Vector2(17, 4));
+        vertices.add(new Vector2(15, 4));
+        // Top right staircase
+        vertices.add(new Vector2(15, 12));
+        vertices.add(new Vector2(14, 12));
+        vertices.add(new Vector2(14, 13));
+        vertices.add(new Vector2(13, 13));
+        vertices.add(new Vector2(13, 14));
+        // Top blocker
+        vertices.add(new Vector2(0, 14));
+        vertices.add(new Vector2(0, 10));
+        vertices.add(new Vector2(-4, 10));
+        vertices.add(new Vector2(-4, 14));
+        vertices.add(new Vector2(-10, 14));
+        vertices.add(new Vector2(-10, 0));
+        // End area
+        vertices.add(new Vector2(-4, 0));
+        vertices.add(new Vector2(-4, 5));
+        vertices.add(new Vector2(0, 5));
 
-        vertices.addAll(corner(9, 10, 1, 1));
-        vertices.addAll(corner(0, 10, 1, 2));
+        return vertices;
+    }
 
+    public static ArrayList<Vector2> floater1() {
+        ArrayList<Vector2> vertices = new ArrayList<Vector2>();
+
+        vertices.add(new Vector2(11, 11));
+        vertices.add(new Vector2(12, 11));
+        vertices.add(new Vector2(12, 10));
+        vertices.add(new Vector2(13, 10));
+        vertices.add(new Vector2(13, 9));
+        vertices.add(new Vector2(11, 9));
+
+        return vertices;
+    }
+
+    public static ArrayList<Vector2> floater2() {
+        ArrayList<Vector2> vertices = new ArrayList<Vector2>();
+
+        vertices.add(new Vector2(5, 11));
+        vertices.add(new Vector2(8, 11));
+        vertices.add(new Vector2(8, 9));
+        vertices.add(new Vector2(5, 9));
 
         return vertices;
     }
