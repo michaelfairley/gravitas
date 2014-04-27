@@ -1,5 +1,7 @@
 package com.m12y.ld29;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -134,15 +136,15 @@ public class Floor {
         // Top blocker
         vertices.add(new Vector2(1, 14));
         vertices.add(new Vector2(1, 10));
-        vertices.add(new Vector2(-2, 10));
-        vertices.add(new Vector2(-2, 13));
-        vertices.add(new Vector2(-9, 13));
+        vertices.add(new Vector2(-4, 10));
+        vertices.addAll(outerCorner(-4, 8, 1, 4));
+        vertices.add(new Vector2(-9, 8));
         vertices.addAll(corner(-9, 0, 3, 3));
         // End area
         vertices.add(new Vector2(-1, 0));
         vertices.add(new Vector2(-1, 4));
-        vertices.add(new Vector2(-4, 4));
-        vertices.add(new Vector2(-4, 5));
+        vertices.add(new Vector2(-6, 4));
+        vertices.add(new Vector2(-6, 5));
         vertices.add(new Vector2(0, 5));
 
         return vertices;
@@ -172,14 +174,39 @@ public class Floor {
         return vertices;
     }
 
-    public static ArrayList<Vector2> floater3() {
-        ArrayList<Vector2> vertices = new ArrayList<Vector2>();
+    public static void draw(ShapeRenderer shapeRenderer) {
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(LD29.WHITE);
 
-        vertices.addAll(outerCorner(-4, 8, 1, 4));
-        vertices.add(new Vector2(-7, 8));
-        vertices.add(new Vector2(-7, 11));
-        vertices.add(new Vector2(-4, 11));
+        shapeRenderer.rect(0, 0, 5, 10);
+        shapeRenderer.rect(5, 2, 2, 8);
+        shapeRenderer.rect(7, 4, 4, 6);
+        shapeRenderer.rect(11, 5, 4, 4);
+        shapeRenderer.rect(13, 0, 2, 12);
+        shapeRenderer.rect(15, 0, 1, 4);
+        shapeRenderer.rect(16, 1, 1, 3);
+        shapeRenderer.arc(16, 1, 1, 269, 91, 20);
+        shapeRenderer.rect(9, -6, 2, 11);
+        shapeRenderer.rect(5, -10, 6, 4);
+        shapeRenderer.rect(5, -6, 2, 2);
+        shapeRenderer.rect(7, -6, 1, 1);
+        shapeRenderer.arc(7, -5, 1, -1, 92, 20);
+        shapeRenderer.rect(12, 10, 2, 3);
+        shapeRenderer.rect(1, 11, 12, 3);
+        shapeRenderer.rect(1, 10, 4, 1);
+        shapeRenderer.rect(8, 10, 3, 1);
+        shapeRenderer.rect(-2, 5, 2, 5);
+        shapeRenderer.rect(-4, 5, 2, 5);
+        shapeRenderer.arc(-6, 3, 3, 180, 92, 20);
+        shapeRenderer.rect(-9, 3, 2, 5);
+        shapeRenderer.rect(-7, 3, 1, 2);
+        shapeRenderer.rect(-7, 5, 3, 3);
+        shapeRenderer.rect(-6, 0, 5, 4);
+        shapeRenderer.rect(-5, 8, 1, 1);
 
-        return vertices;
+        shapeRenderer.setColor(LD29.BLACK);
+        shapeRenderer.arc(-5, 9, 1, 269, 92, 20);
+
+        shapeRenderer.end();
     }
 }

@@ -28,10 +28,10 @@ public class Player {
 
         PolygonShape shape = new PolygonShape();
         shape.set(new float[]{
-                -0.5f, 0.5f,
-                0.5f, 0.5f,
-                0.5f, 1.7f,
-                -0.5f, 1.7f
+                -0.48f, 0.5f,
+                0.48f, 0.5f,
+                0.48f, 1.7f,
+                -0.48f, 1.7f
         });
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
@@ -42,7 +42,7 @@ public class Player {
 
         CircleShape shape3 = new CircleShape();
         shape3.setRadius(0.5f);
-        shape3.setPosition(new Vector2(0, 0.5f));
+        shape3.setPosition(new Vector2(0, 0.51f));
         fixtureDef.shape = shape3;
         body.createFixture(fixtureDef);
         shape3.dispose();
