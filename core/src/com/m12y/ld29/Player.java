@@ -75,14 +75,20 @@ public class Player {
 
         Vector2 delta = new Vector2();
 
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.S) ||
+                Gdx.input.isKeyPressed(Input.Keys.A) ||
+                Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             delta.add(-4, 0);
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.F)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.F) ||
+                Gdx.input.isKeyPressed(Input.Keys.D) ||
+                Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             delta.add(4, 0);
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.E) && isOnGround()) {
+        if ((Gdx.input.isKeyPressed(Input.Keys.E) ||
+                Gdx.input.isKeyPressed(Input.Keys.W) ||
+                Gdx.input.isKeyPressed(Input.Keys.UP)) && isOnGround()) {
             delta.add(0, 1.6f);
         }
 

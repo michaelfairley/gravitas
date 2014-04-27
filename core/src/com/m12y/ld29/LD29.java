@@ -115,11 +115,24 @@ public class LD29 extends ApplicationAdapter {
         spriteBatch.begin();
         font.setColor(Color.BLACK);
 
-        font.draw(spriteBatch, "W", 60, 80);
-        font.draw(spriteBatch, "S", 144, 180);
+        font.draw(spriteBatch, "A", 62, 80);
+        font.draw(spriteBatch, "W", 138, 180);
         font.draw(spriteBatch, "D", 220, 80);
 
         spriteBatch.end();
+
+        shapeRenderer.setProjectionMatrix(textCamera.combined);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+
+        shapeRenderer.rect(70, 100, 20, 6);
+        shapeRenderer.triangle(60, 103, 70, 112, 70, 94);
+        shapeRenderer.rect(223, 100, 20, 6);
+        shapeRenderer.triangle(252, 103, 243, 112, 243, 94);
+        shapeRenderer.rect(155, 194, 6, 20);
+        shapeRenderer.triangle(158, 224, 149, 214, 167, 214);
+
+        shapeRenderer.end();
+        shapeRenderer.setProjectionMatrix(camera.combined);
     }
 
     private void drawExitText() {
