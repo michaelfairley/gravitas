@@ -16,6 +16,7 @@ public class Player {
     float angle;
     private Set<Fixture> floorsTouching;
     boolean won;
+    boolean dead;
 
     public Player(World world) {
         angle = 0;
@@ -176,6 +177,11 @@ public class Player {
 
     public void win() {
         won = true;
+        stop();
+    }
+
+    public void die() {
+        dead = true;
         stop();
     }
 }

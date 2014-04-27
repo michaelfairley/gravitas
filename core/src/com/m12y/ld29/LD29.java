@@ -27,6 +27,7 @@ public class LD29 extends ApplicationAdapter {
     Exit exit;
     BitmapFont font;
     SpriteBatch spriteBatch;
+    Spikes spikes;
 
     @Override
 	public void create () {
@@ -51,14 +52,14 @@ public class LD29 extends ApplicationAdapter {
         new Floor(world, Floor.floater1());
         new Floor(world, Floor.floater2());
         exit = new Exit(world);
+        spikes = new Spikes(world);
     }
 
     @Override
 	public void render () {
         if (Gdx.input.isKeyPressed(Input.Keys.R)) setup();
 
-        if (!player.won) {
-            player.stop();
+        if (!player.won && !player.dead) {
             player.update();
         }
         world.step(1/60f, 6, 2);
@@ -89,11 +90,25 @@ public class LD29 extends ApplicationAdapter {
         Floor.draw(shapeRenderer);
         drawExitText();
         drawHelpText();
+        if (player.dead) drawGameOverText();
         exit.draw(shapeRenderer);
         player.draw(shapeRenderer);
+        spikes.draw(shapeRenderer);
 
 //        debugRenderer.render(world, camera.combined);
 	}
+
+    private void drawGameOverText() {
+        spriteBatch.begin();
+
+        font.setColor(LD29.BLACK);
+        font.draw(spriteBatch, "Game over", 400, -460);
+
+        font.setColor(LD29.WHITE);
+        font.draw(spriteBatch, "Press R to try again", 312, -680);
+
+        spriteBatch.end();
+    }
 
     private void drawHelpText() {
         spriteBatch.begin();
