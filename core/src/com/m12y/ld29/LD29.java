@@ -60,7 +60,7 @@ public class LD29 extends ApplicationAdapter {
 	public void render () {
         if (Gdx.input.isKeyPressed(Input.Keys.R)) setup();
 
-        if (!player.won && !player.dead) {
+        if (!player.dead) {
             player.update();
         }
         world.step(1/60f, 6, 2);

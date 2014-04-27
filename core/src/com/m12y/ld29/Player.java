@@ -17,6 +17,22 @@ public class Player {
     private Set<Fixture> floorsTouching;
     boolean won;
     boolean dead;
+    float wheelAngle;
+
+    static final Color[] colors = new Color[] {
+            new Color(0xff/255f, 0x00/255f, 0x00/255f, 1),
+            new Color(0xff/255f, 0x7f/255f, 0x00/255f, 1),
+            new Color(0xff/255f, 0xff/255f, 0x00/255f, 1),
+            new Color(0x7f/255f, 0xff/255f, 0x00/255f, 1),
+            new Color(0x00/255f, 0xff/255f, 0x00/255f, 1),
+            new Color(0x00/255f, 0xff/255f, 0x7f/255f, 1),
+            new Color(0x00/255f, 0xff/255f, 0xff/255f, 1),
+            new Color(0x00/255f, 0x7f/255f, 0xff/255f, 1),
+            new Color(0x00/255f, 0x00/255f, 0xff/255f, 1),
+            new Color(0x7f/255f, 0x00/255f, 0xff/255f, 1),
+            new Color(0xff/255f, 0x00/255f, 0xff/255f, 1),
+            new Color(0xff/255f, 0x00/255f, 0x7f/255f, 1)
+    };
 
     public Player(World world) {
         angle = 0;
@@ -28,20 +44,9 @@ public class Player {
         body = world.createBody(bodyDef);
         body.setUserData(this);
 
-        PolygonShape shape = new PolygonShape();
-        shape.set(new float[]{
-                -0.48f, 0.5f,
-                0.48f, 0.5f,
-                0.48f, 1.7f,
-                -0.48f, 1.7f
-        });
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = shape;
         fixtureDef.friction = 0;
-        fixtureDef.density = 1f;
-        Fixture topFixture = body.createFixture(fixtureDef);
-        topFixture.setUserData("player");
-        shape.dispose();
+        fixtureDef.density = 2.5f;
 
         CircleShape shape3 = new CircleShape();
         shape3.setRadius(0.5f);
@@ -91,6 +96,12 @@ public class Player {
                 Gdx.input.isKeyPressed(Input.Keys.UP)) && isOnGround()) {
             delta.add(0, 1.6f);
         }
+
+        wheelAngle -= delta.x * 1.5f;
+        if (!isOnGround()) {
+            wheelAngle -= delta.x *1.5f;
+        }
+        wheelAngle %= 360;
 
         delta.add(0, body.getLinearVelocity().rotateRad(-angle).y);
 
@@ -152,26 +163,22 @@ public class Player {
 
     public void draw(ShapeRenderer shapeRenderer) {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(LD29.GRAY);
+        shapeRenderer.setColor(LD29.WHITE);
 
         Vector2 pos = body.getPosition();
 
-        Vector2 bottomLeft = new Vector2(-0.5f, 0);
-        bottomLeft.rotateRad(angle);
-        bottomLeft.add(pos);
+        Vector2 circleCenter = new Vector2(0, 0.5f).rotateRad(angle).add(pos);
 
-        Vector2 shape = new Vector2(1, 1.7f);
+        shapeRenderer.circle(circleCenter.x, circleCenter.y, 0.5f, 20);
 
-        shapeRenderer.rect(
-                bottomLeft.x,
-                bottomLeft.y,
-                shape.x,
-                shape.y,
-                0,
-                0,
-                MathUtils.radiansToDegrees * angle
-        );
+        float degrees = 360f/colors.length;
 
+        for (int i = 0; i < colors.length; i++) {
+            Color color = colors[i];
+            float f = wheelAngle + degrees*i;
+            shapeRenderer.setColor(color);
+            shapeRenderer.arc(circleCenter.x, circleCenter.y, 0.5f, f, degrees, 5);
+        }
         shapeRenderer.end();
     }
 
@@ -183,7 +190,6 @@ public class Player {
 
     public void win() {
         won = true;
-        stop();
     }
 
     public void die() {
