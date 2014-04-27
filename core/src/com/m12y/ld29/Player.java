@@ -15,6 +15,7 @@ public class Player {
     final Body body;
     float angle;
     private Set<Fixture> floorsTouching;
+    boolean won;
 
     public Player(World world) {
         angle = 0;
@@ -37,14 +38,16 @@ public class Player {
         fixtureDef.shape = shape;
         fixtureDef.friction = 0;
         fixtureDef.density = 1f;
-        body.createFixture(fixtureDef);
+        Fixture topFixture = body.createFixture(fixtureDef);
+        topFixture.setUserData("player");
         shape.dispose();
 
         CircleShape shape3 = new CircleShape();
         shape3.setRadius(0.5f);
         shape3.setPosition(new Vector2(0, 0.51f));
         fixtureDef.shape = shape3;
-        body.createFixture(fixtureDef);
+        Fixture bottomFixture = body.createFixture(fixtureDef);
+        bottomFixture.setUserData("player");
         shape3.dispose();
 
         PolygonShape shape2 = new PolygonShape();
@@ -59,8 +62,8 @@ public class Player {
         fixtureDef2.friction = 0;
         fixtureDef2.isSensor = true;
         fixtureDef2.density = 1;
-        Fixture fixture = body.createFixture(fixtureDef2);
-        fixture.setUserData("foot");
+        Fixture footFixture = body.createFixture(fixtureDef2);
+        footFixture.setUserData("foot");
         shape2.dispose();
 
         floorsTouching = new HashSet<Fixture>();
@@ -163,5 +166,16 @@ public class Player {
         );
 
         shapeRenderer.end();
+    }
+
+    public void stop() {
+        Vector2 delta = new Vector2(0, body.getLinearVelocity().rotateRad(-angle).y);
+
+        body.setLinearVelocity(delta.rotateRad(angle));
+    }
+
+    public void win() {
+        won = true;
+        stop();
     }
 }

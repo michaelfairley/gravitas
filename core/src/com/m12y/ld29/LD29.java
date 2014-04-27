@@ -45,7 +45,10 @@ public class LD29 extends ApplicationAdapter {
 	public void render () {
         if (Gdx.input.isKeyPressed(Input.Keys.R)) setup();
 
-        player.update();
+        if (!player.won) {
+            player.stop();
+            player.update();
+        }
         world.step(1/60f, 6, 2);
 
         Vector2 playerPos = player.body.getPosition();
@@ -64,8 +67,8 @@ public class LD29 extends ApplicationAdapter {
 
         shapeRenderer.setProjectionMatrix(camera.combined);
         Floor.draw(shapeRenderer);
-        player.draw(shapeRenderer);
         exit.draw(shapeRenderer);
+        player.draw(shapeRenderer);
 
 //        debugRenderer.render(world, camera.combined);
 	}

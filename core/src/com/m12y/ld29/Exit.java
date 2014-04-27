@@ -16,10 +16,10 @@ public class Exit {
 
         PolygonShape shape = new PolygonShape();
         shape.set(new float[]{
-                -WIDTH, 0.0f,
-                WIDTH, 0.0f,
-                WIDTH, 1.7f,
-                -WIDTH, 1.7f
+                0.45f, 0.0f,
+                0.6f, 0.0f,
+                0.6f, 1.7f,
+                0.45f, 1.7f
         });
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
@@ -32,8 +32,7 @@ public class Exit {
         shape2.setRadius(WIDTH);
         shape2.setPosition(new Vector2(0, 1.7f));
         fixtureDef.shape = shape2;
-        Fixture topFixture = body.createFixture(fixtureDef);
-        topFixture.setUserData("exit");
+        body.createFixture(fixtureDef);
         shape2.dispose();
     }
 
