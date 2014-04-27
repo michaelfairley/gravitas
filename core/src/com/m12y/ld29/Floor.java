@@ -56,7 +56,7 @@ public class Floor {
                 throw new RuntimeException("that ain't a quadrant i've heard of");
         }
 
-        for (float t = (quadrant-1) * MathUtils.PI/2; t < quadrant * MathUtils.PI/2; t += 0.05f) {
+        for (float t = (quadrant-1) * MathUtils.PI/2; t < quadrant * MathUtils.PI/2; t += 0.05f/r) {
             vertices.add(new Vector2(a + r * MathUtils.cos(t), b + r * MathUtils.sin(t)));
         }
 
@@ -132,14 +132,16 @@ public class Floor {
         vertices.add(new Vector2(13, 13));
         vertices.add(new Vector2(13, 14));
         // Top blocker
-        vertices.add(new Vector2(0, 14));
-        vertices.add(new Vector2(0, 10));
-        vertices.add(new Vector2(-3, 10));
-        vertices.add(new Vector2(-3, 14));
-        vertices.add(new Vector2(-10, 14));
-        vertices.add(new Vector2(-10, 0));
+        vertices.add(new Vector2(1, 14));
+        vertices.add(new Vector2(1, 10));
+        vertices.add(new Vector2(-2, 10));
+        vertices.add(new Vector2(-2, 13));
+        vertices.add(new Vector2(-9, 13));
+        vertices.addAll(corner(-9, 0, 3, 3));
         // End area
-        vertices.add(new Vector2(-4, 0));
+        vertices.add(new Vector2(-1, 0));
+        vertices.add(new Vector2(-1, 4));
+        vertices.add(new Vector2(-4, 4));
         vertices.add(new Vector2(-4, 5));
         vertices.add(new Vector2(0, 5));
 
@@ -164,8 +166,8 @@ public class Floor {
 
         vertices.add(new Vector2(5, 11));
         vertices.add(new Vector2(8, 11));
-        vertices.add(new Vector2(8, 9));
-        vertices.add(new Vector2(5, 9));
+        vertices.add(new Vector2(8, 10));
+        vertices.add(new Vector2(5, 10));
 
         return vertices;
     }
@@ -173,10 +175,10 @@ public class Floor {
     public static ArrayList<Vector2> floater3() {
         ArrayList<Vector2> vertices = new ArrayList<Vector2>();
 
-        vertices.addAll(outerCorner(-5, 8, 1, 4));
-        vertices.addAll(outerCorner(-8, 8, 1, 3));
-        vertices.addAll(outerCorner(-8, 11, 1, 2));
-        vertices.addAll(outerCorner(-5, 11, 1, 1));
+        vertices.addAll(outerCorner(-4, 8, 1, 4));
+        vertices.add(new Vector2(-7, 8));
+        vertices.add(new Vector2(-7, 11));
+        vertices.add(new Vector2(-4, 11));
 
         return vertices;
     }
