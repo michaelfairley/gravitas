@@ -1,4 +1,4 @@
-package com.m12y.ld29;
+package com.m12y.gravitas;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -163,7 +163,7 @@ public class Player {
 
     public void draw(ShapeRenderer shapeRenderer) {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(LD29.WHITE);
+        shapeRenderer.setColor(Gravitas.WHITE);
 
         Vector2 pos = body.getPosition();
 

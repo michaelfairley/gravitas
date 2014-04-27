@@ -1,14 +1,11 @@
-package com.m12y.ld29;
+package com.m12y.gravitas;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 
 public class Floor {
     final Body body;
@@ -175,7 +172,7 @@ public class Floor {
 
     public static void draw(ShapeRenderer shapeRenderer) {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(LD29.WHITE);
+        shapeRenderer.setColor(Gravitas.WHITE);
 
         shapeRenderer.rect(0, 0, 5, 10);
         shapeRenderer.rect(5, 2, 2, 8);
@@ -203,7 +200,7 @@ public class Floor {
         shapeRenderer.rect(-6, 0, 5, 4);
         shapeRenderer.rect(-5, 8, 1, 1);
 
-        shapeRenderer.setColor(LD29.BLACK);
+        shapeRenderer.setColor(Gravitas.BLACK);
         shapeRenderer.arc(-5, 9, 1, 269, 92, 20);
 
         shapeRenderer.end();

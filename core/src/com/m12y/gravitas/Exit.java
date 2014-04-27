@@ -1,4 +1,4 @@
-package com.m12y.ld29;
+package com.m12y.gravitas;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -38,7 +38,7 @@ public class Exit {
 
     public void draw(ShapeRenderer shapeRenderer) {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(LD29.BLACK);
+        shapeRenderer.setColor(Gravitas.BLACK);
 
         Vector2 pos = body.getPosition();
 

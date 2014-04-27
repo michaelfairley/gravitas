@@ -1,9 +1,9 @@
-package com.m12y.ld29.client;
+package com.m12y.gravitas.client;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import com.m12y.ld29.LD29;
+import com.m12y.gravitas.Gravitas;
 
 public class HtmlLauncher extends GwtApplication {
 
@@ -14,6 +14,6 @@ public class HtmlLauncher extends GwtApplication {
 
         @Override
         public ApplicationListener getApplicationListener () {
-                return new LD29();
+                return new Gravitas();
         }
 }

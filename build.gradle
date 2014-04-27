@@ -15,7 +15,7 @@ allprojects {
 
     version = '1.0'
     ext {
-        appName = 'LD29'
+        appName = 'Gravitas'
         gdxVersion = '1.0.0'
         roboVMVersion = '0.0.11'
     }

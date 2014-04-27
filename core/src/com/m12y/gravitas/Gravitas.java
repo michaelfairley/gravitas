@@ -1,4 +1,4 @@
-package com.m12y.ld29;
+package com.m12y.gravitas;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -14,7 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class LD29 extends ApplicationAdapter {
+public class Gravitas extends ApplicationAdapter {
     public static final Color WHITE = new Color(0.95f, 0.95f, 0.95f, 1);
     public static final Color BLACK = new Color(0.05f, 0.05f, 0.05f, 1);
     public static final Color GRAY = new Color(0.5f, 0.5f, 0.5f, 1);
@@ -102,10 +102,10 @@ public class LD29 extends ApplicationAdapter {
     private void drawGameOverText() {
         spriteBatch.begin();
 
-        font.setColor(LD29.BLACK);
+        font.setColor(Gravitas.BLACK);
         font.draw(spriteBatch, "Game over", 400, -460);
 
-        font.setColor(LD29.WHITE);
+        font.setColor(Gravitas.WHITE);
         font.draw(spriteBatch, "Press R to try again", 312, -680);
 
         spriteBatch.end();
@@ -138,13 +138,13 @@ public class LD29 extends ApplicationAdapter {
     private void drawExitText() {
         spriteBatch.begin();
         if (player.won) {
-            font.setColor(LD29.BLACK);
+            font.setColor(Gravitas.BLACK);
             font.draw(spriteBatch, "Thanks for playing", -500, 220);
 
-            font.setColor(LD29.WHITE);
+            font.setColor(Gravitas.WHITE);
             font.draw(spriteBatch, "Press R to play again", -500, -30);
         } else {
-            font.setColor(LD29.BLACK);
+            font.setColor(Gravitas.BLACK);
             font.draw(spriteBatch, "EXIT", -242, 220);
         }
 

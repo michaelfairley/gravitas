@@ -1,7 +1,5 @@
-package com.m12y.ld29;
+package com.m12y.gravitas;
 
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactListener {
