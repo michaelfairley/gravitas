@@ -17,7 +17,6 @@ import com.badlogic.gdx.physics.box2d.World;
 public class Gravitas extends ApplicationAdapter {
     public static final Color WHITE = new Color(0.95f, 0.95f, 0.95f, 1);
     public static final Color BLACK = new Color(0.05f, 0.05f, 0.05f, 1);
-    public static final Color GRAY = new Color(0.5f, 0.5f, 0.5f, 1);
 
 	World world;
     Box2DDebugRenderer debugRenderer;
