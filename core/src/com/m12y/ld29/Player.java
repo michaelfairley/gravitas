@@ -2,6 +2,8 @@ package com.m12y.ld29;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -136,5 +138,30 @@ public class Player {
         point2.sub(point1);
         float angle = MathUtils.atan2(point2.y, point2.x);
         return (angle + MathUtils.PI2) % MathUtils.PI2;
+    }
+
+    public void draw(ShapeRenderer shapeRenderer) {
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.GRAY);
+
+        Vector2 pos = body.getPosition();
+
+        Vector2 bottomLeft = new Vector2(-0.5f, 0);
+        bottomLeft.rotateRad(angle);
+        bottomLeft.add(pos);
+
+        Vector2 shape = new Vector2(1, 1.7f);
+
+        shapeRenderer.rect(
+                bottomLeft.x,
+                bottomLeft.y,
+                shape.x,
+                shape.y,
+                0,
+                0,
+                MathUtils.radiansToDegrees * angle
+        );
+
+        shapeRenderer.end();
     }
 }

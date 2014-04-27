@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -14,10 +15,12 @@ public class LD29 extends ApplicationAdapter {
     Box2DDebugRenderer debugRenderer;
     OrthographicCamera camera;
     Player player;
+    ShapeRenderer shapeRenderer;
 
     @Override
 	public void create () {
         debugRenderer = new Box2DDebugRenderer();
+        shapeRenderer = new ShapeRenderer();
         setup();
 	}
 
@@ -53,6 +56,9 @@ public class LD29 extends ApplicationAdapter {
 
 		Gdx.gl.glClearColor(.9f, .9f, .9f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        shapeRenderer.setProjectionMatrix(camera.combined);
+        player.draw(shapeRenderer);
 
         debugRenderer.render(world, camera.combined);
 	}
