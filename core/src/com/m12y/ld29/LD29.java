@@ -20,6 +20,7 @@ public class LD29 extends ApplicationAdapter {
     OrthographicCamera camera;
     Player player;
     ShapeRenderer shapeRenderer;
+    Exit exit;
 
     @Override
 	public void create () {
@@ -37,6 +38,7 @@ public class LD29 extends ApplicationAdapter {
         new Floor(world, Floor.floor());
         new Floor(world, Floor.floater1());
         new Floor(world, Floor.floater2());
+        exit = new Exit(world);
     }
 
     @Override
@@ -63,6 +65,7 @@ public class LD29 extends ApplicationAdapter {
         shapeRenderer.setProjectionMatrix(camera.combined);
         Floor.draw(shapeRenderer);
         player.draw(shapeRenderer);
+        exit.draw(shapeRenderer);
 
 //        debugRenderer.render(world, camera.combined);
 	}

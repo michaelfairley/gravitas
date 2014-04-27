@@ -21,7 +21,7 @@ public class Player {
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(3, 3);
+        bodyDef.position.set(1, 2);
         bodyDef.fixedRotation = true;
         body = world.createBody(bodyDef);
         body.setUserData(this);
