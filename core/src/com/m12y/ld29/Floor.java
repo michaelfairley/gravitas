@@ -63,6 +63,41 @@ public class Floor {
         return vertices;
     }
 
+    public static ArrayList<Vector2> outerCorner(float x, float y, float r, int quadrant) {
+        ArrayList<Vector2> vertices = new ArrayList<Vector2>();
+
+        float a;
+        float b;
+
+        switch (quadrant) {
+            case 1:
+                a = x-r;
+                b = y-r;
+                break;
+            case 2:
+                a = x+r;
+                b = y-r;
+                break;
+            case 3:
+                a = x+r;
+                b = y+r;
+                break;
+            case 4:
+                a = x-r;
+                b = y+r;
+                break;
+            default:
+                throw new RuntimeException("that ain't a quadrant i've heard of");
+        }
+
+//        for (float t = (quadrant-1) * MathUtils.PI/2; t < quadrant * MathUtils.PI/2; t += 0.05f) {
+        for (float t = quadrant * MathUtils.PI/2; t > (quadrant-1) * MathUtils.PI/2; t -= 0.05f) {
+            vertices.add(new Vector2(a + r * MathUtils.cos(t), b + r * MathUtils.sin(t)));
+        }
+
+        return vertices;
+    }
+
     public static ArrayList<Vector2> floor() {
         ArrayList<Vector2> vertices = new ArrayList<Vector2>();
 
@@ -99,8 +134,8 @@ public class Floor {
         // Top blocker
         vertices.add(new Vector2(0, 14));
         vertices.add(new Vector2(0, 10));
-        vertices.add(new Vector2(-4, 10));
-        vertices.add(new Vector2(-4, 14));
+        vertices.add(new Vector2(-3, 10));
+        vertices.add(new Vector2(-3, 14));
         vertices.add(new Vector2(-10, 14));
         vertices.add(new Vector2(-10, 0));
         // End area
@@ -131,6 +166,17 @@ public class Floor {
         vertices.add(new Vector2(8, 11));
         vertices.add(new Vector2(8, 9));
         vertices.add(new Vector2(5, 9));
+
+        return vertices;
+    }
+
+    public static ArrayList<Vector2> floater3() {
+        ArrayList<Vector2> vertices = new ArrayList<Vector2>();
+
+        vertices.addAll(outerCorner(-5, 8, 1, 4));
+        vertices.addAll(outerCorner(-8, 8, 1, 3));
+        vertices.addAll(outerCorner(-8, 11, 1, 2));
+        vertices.addAll(outerCorner(-5, 11, 1, 1));
 
         return vertices;
     }

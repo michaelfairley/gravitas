@@ -30,6 +30,7 @@ public class LD29 extends ApplicationAdapter {
         new Floor(world, Floor.floor());
         new Floor(world, Floor.floater1());
         new Floor(world, Floor.floater2());
+        new Floor(world, Floor.floater3());
     }
 
     @Override

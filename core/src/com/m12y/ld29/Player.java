@@ -47,8 +47,8 @@ public class Player {
 
         PolygonShape shape2 = new PolygonShape();
         shape2.set(new float[]{
-                -0.01f, -0.1f,
-                0.01f, -0.1f,
+                -0.01f, -0.25f,
+                0.01f, -0.25f,
                 0.01f, 0f,
                 -0.01f, 0f
         });
@@ -77,7 +77,7 @@ public class Player {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.E) && isOnGround()) {
-            delta.add(0, 2.3f);
+            delta.add(0, 1.6f);
         }
 
         delta.add(0, body.getLinearVelocity().rotateRad(-angle).y);
