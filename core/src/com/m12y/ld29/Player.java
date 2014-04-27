@@ -26,19 +26,24 @@ public class Player {
 
         PolygonShape shape = new PolygonShape();
         shape.set(new float[]{
-                -0.5f, 0.4f,
-                -0.1f, 0f,
-                0.1f, 0f,
-                0.5f, 0.4f,
+                -0.5f, 0.5f,
+                0.5f, 0.5f,
                 0.5f, 1.7f,
                 -0.5f, 1.7f
         });
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.friction = 0;
-        fixtureDef.density = 1.3f;
+        fixtureDef.density = 1f;
         body.createFixture(fixtureDef);
         shape.dispose();
+
+        CircleShape shape3 = new CircleShape();
+        shape3.setRadius(0.5f);
+        shape3.setPosition(new Vector2(0, 0.5f));
+        fixtureDef.shape = shape3;
+        body.createFixture(fixtureDef);
+        shape3.dispose();
 
         PolygonShape shape2 = new PolygonShape();
         shape2.set(new float[]{
