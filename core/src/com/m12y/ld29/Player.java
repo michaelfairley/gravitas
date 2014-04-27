@@ -146,7 +146,7 @@ public class Player {
 
     public void draw(ShapeRenderer shapeRenderer) {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(Color.GRAY);
+        shapeRenderer.setColor(LD29.GRAY);
 
         Vector2 pos = body.getPosition();
 
