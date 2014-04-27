@@ -16,7 +16,6 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
         } else if ("floor".equals(fixtureA.getUserData()) && "foot".equals(fixtureB.getUserData())) {
             Player player = (Player) fixtureB.getBody().getUserData();
             player.startedTouchingFloor(fixtureA);
-
         }
     }
 

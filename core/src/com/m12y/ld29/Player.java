@@ -79,7 +79,7 @@ public class Player {
 
         body.setLinearVelocity(delta.rotateRad(angle));
 
-        body.applyForceToCenter(new Vector2(0, -20).rotateRad(angle), true);
+        body.applyForceToCenter(new Vector2(0, -25).rotateRad(angle), true);
     }
 
     public boolean isOnGround() {
@@ -87,6 +87,8 @@ public class Player {
     }
 
     public void startedTouchingFloor(Fixture floor) {
+        float angleDifference = Math.abs(floorAngle(floor) - angle);
+        if (angleDifference > 1 && angleDifference < MathUtils.PI2-1) return;
         floorsTouching.add(floor);
         calculateAngle();
     }
@@ -100,16 +102,34 @@ public class Player {
         if (floorsTouching.isEmpty()) return;
         float sum = 0;
 
+        boolean anglesNear2Pi = false;
+
         for (Fixture fixture : floorsTouching) {
-            ChainShape floorShape = (ChainShape) fixture.getShape();
-            Vector2 point1 = new Vector2();
-            floorShape.getVertex(0, point1);
-            Vector2 point2 = new Vector2();
-            floorShape.getVertex(1, point2);
-            point2.sub(point1);
-            sum += MathUtils.atan2(point2.y, point2.x);
+            if (floorAngle(fixture) > MathUtils.PI2 - 1) {
+                anglesNear2Pi = true;
+                break;
+            }
+        }
+
+        for (Fixture fixture : floorsTouching) {
+            float fAngle = floorAngle(fixture);
+            if (anglesNear2Pi && fAngle < 1) {
+                fAngle += MathUtils.PI2;
+            }
+            sum += fAngle;
         }
 
         angle = sum / floorsTouching.size();
+    }
+
+    static float floorAngle(Fixture fixture) {
+        ChainShape floorShape = (ChainShape) fixture.getShape();
+        Vector2 point1 = new Vector2();
+        floorShape.getVertex(0, point1);
+        Vector2 point2 = new Vector2();
+        floorShape.getVertex(1, point2);
+        point2.sub(point1);
+        float angle = MathUtils.atan2(point2.y, point2.x);
+        return (angle + MathUtils.PI2) % MathUtils.PI2;
     }
 }

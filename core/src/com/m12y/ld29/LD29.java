@@ -17,7 +17,6 @@ public class LD29 extends ApplicationAdapter {
     Box2DDebugRenderer debugRenderer;
     OrthographicCamera camera;
     Player player;
-    Floor floor;
 
     @Override
 	public void create () {
@@ -30,7 +29,7 @@ public class LD29 extends ApplicationAdapter {
         player = new Player(world);
         world.setContactListener(new ContactListener());
         camera = new OrthographicCamera();
-        floor = new Floor(world);
+        new Floor(world, Floor.floor1());
     }
 
     @Override
