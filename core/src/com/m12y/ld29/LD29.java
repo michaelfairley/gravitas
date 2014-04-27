@@ -2,6 +2,7 @@ package com.m12y.ld29;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -29,11 +30,14 @@ public class LD29 extends ApplicationAdapter {
         player = new Player(world);
         world.setContactListener(new ContactListener());
         camera = new OrthographicCamera();
+        camera.setToOrtho(false, Gdx.graphics.getWidth() / 64f, Gdx.graphics.getHeight() / 64f);
         new Floor(world, Floor.floor1());
     }
 
     @Override
 	public void render () {
+        if (Gdx.input.isKeyPressed(Input.Keys.R)) setup();
+
         player.update();
         world.step(1/60f, 6, 2);
 
