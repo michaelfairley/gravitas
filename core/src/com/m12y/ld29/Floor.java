@@ -92,7 +92,6 @@ public class Floor {
                 throw new RuntimeException("that ain't a quadrant i've heard of");
         }
 
-//        for (float t = (quadrant-1) * MathUtils.PI/2; t < quadrant * MathUtils.PI/2; t += 0.05f) {
         for (float t = quadrant * MathUtils.PI/2; t > (quadrant-1) * MathUtils.PI/2; t -= 0.05f) {
             vertices.add(new Vector2(a + r * MathUtils.cos(t), b + r * MathUtils.sin(t)));
         }
