@@ -3,20 +3,60 @@ package com.m12y.ld29;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 
 public class LD29 extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	
-	@Override
+	World world;
+    Box2DDebugRenderer debugRenderer;
+    OrthographicCamera camera;
+    Player player;
+    Floor floor;
+
+    @Override
 	public void create () {
+        debugRenderer = new Box2DDebugRenderer();
+        setup();
 	}
 
-	@Override
+    private void setup() {
+        world = new World(Vector2.Zero, true);
+        player = new Player(world);
+        world.setContactListener(new ContactListener());
+        camera = new OrthographicCamera();
+        floor = new Floor(world);
+    }
+
+    @Override
 	public void render () {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+        player.update();
+        world.step(1/60f, 6, 2);
+
+        Vector2 playerPos = player.body.getPosition();
+        Vector2 centering = new Vector2(0, 3).rotateRad(player.angle).add(playerPos);
+
+        camera.up.set(0, 1, 0);
+        camera.direction.set(0, 0, -1);
+        camera.up.rotateRad(camera.direction, -player.angle);
+        camera.direction.rotateRad(camera.direction, -player.angle);
+        camera.translate(centering.x - camera.position.x, centering.y - camera.position.y);
+
+        camera.update();
+
+		Gdx.gl.glClearColor(.9f, .9f, .9f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        debugRenderer.render(world, camera.combined);
 	}
+
+    @Override
+    public void resize(int width, int height) {
+        camera.setToOrtho(false, width / 64f, height / 64f);
+    }
 }
