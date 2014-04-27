@@ -2,13 +2,17 @@ package com.m12y.ld29;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class Player {
     final Body body;
     float angle;
-    int floorsTouching = 0;
+    private Set<Fixture> floorsTouching;
 
     public Player(World world) {
         angle = 0;
@@ -37,7 +41,12 @@ public class Player {
         shape.dispose();
 
         PolygonShape shape2 = new PolygonShape();
-        shape2.set(new float[]{-0.1f, -0.1f, 0.1f, -0.1f, 0.1f, 0f, -0.1f, 0f});
+        shape2.set(new float[]{
+                -0.01f, -0.1f,
+                0.01f, -0.1f,
+                0.01f, 0f,
+                -0.01f, 0f
+        });
         FixtureDef fixtureDef2 = new FixtureDef();
         fixtureDef2.shape = shape2;
         fixtureDef2.friction = 0;
@@ -46,6 +55,8 @@ public class Player {
         Fixture fixture = body.createFixture(fixtureDef2);
         fixture.setUserData("foot");
         shape2.dispose();
+
+        floorsTouching = new HashSet<Fixture>();
     }
 
     public void update() {
@@ -72,6 +83,33 @@ public class Player {
     }
 
     public boolean isOnGround() {
-        return floorsTouching > 0;
+        return !floorsTouching.isEmpty();
+    }
+
+    public void startedTouchingFloor(Fixture floor) {
+        floorsTouching.add(floor);
+        calculateAngle();
+    }
+
+    public void stoppedTouchingFloor(Fixture floor) {
+        floorsTouching.remove(floor);
+        calculateAngle();
+    }
+
+    public void calculateAngle() {
+        if (floorsTouching.isEmpty()) return;
+        float sum = 0;
+
+        for (Fixture fixture : floorsTouching) {
+            ChainShape floorShape = (ChainShape) fixture.getShape();
+            Vector2 point1 = new Vector2();
+            floorShape.getVertex(0, point1);
+            Vector2 point2 = new Vector2();
+            floorShape.getVertex(1, point2);
+            point2.sub(point1);
+            sum += MathUtils.atan2(point2.y, point2.x);
+        }
+
+        angle = sum / floorsTouching.size();
     }
 }
