@@ -7,6 +7,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -28,6 +29,7 @@ public class Gravitas extends ApplicationAdapter {
     BitmapFont font;
     SpriteBatch spriteBatch;
     Spikes spikes;
+    Texture logo;
 
     @Override
 	public void create () {
@@ -37,6 +39,7 @@ public class Gravitas extends ApplicationAdapter {
         FileHandle fontFile = Gdx.files.internal("verdana.fnt");
         FileHandle fontImageFile = Gdx.files.internal("verdana.png");
         font = new BitmapFont(fontFile, fontImageFile, false);
+        logo = new Texture(Gdx.files.internal("gravitas.png"));
         setup();
 	}
 
@@ -88,6 +91,7 @@ public class Gravitas extends ApplicationAdapter {
         shapeRenderer.setProjectionMatrix(camera.combined);
         spriteBatch.setProjectionMatrix(textCamera.combined);
         Floor.draw(shapeRenderer);
+        drawLogo();
         drawExitText();
         drawHelpText();
         if (player.dead) drawGameOverText();
@@ -97,6 +101,12 @@ public class Gravitas extends ApplicationAdapter {
 
 //        debugRenderer.render(world, camera.combined);
 	}
+
+    private void drawLogo() {
+        spriteBatch.begin();
+        spriteBatch.draw(logo, 50, 450);
+        spriteBatch.end();
+    }
 
     private void drawGameOverText() {
         spriteBatch.begin();
